@@ -36,7 +36,7 @@
     <header class="py-8 px-4 border-b border-blue-900/50">
         <div class="max-w-6xl mx-auto text-center">
             <div class="flex items-center justify-center gap-4 mb-4">
-                <span class="text-5xl float-animation">🃏</span>
+                <span class="text-5xl float-animation">❤️</span>
                 <h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                     LLM Poker Benchmark
                 </h1>
@@ -114,7 +114,7 @@
                     <p class="text-gray-400 text-sm leading-relaxed">
                         Our benchmark evaluates LLMs on strategic poker reasoning through 20 carefully crafted scenarios. 
                         Each question tests different aspects of poker knowledge including hand evaluation, pot odds calculation, 
-                        position play, and bluffing strategies. Models are evaluated on accuracy.
+                        position play, and bluffing strategies. Each question has only 1 correct answer which is verified using the solver GTO Wizard. Models are evaluated on accuracy.
                     </p>
                 </div>
                 <div>
@@ -162,7 +162,8 @@
             { rank: 3, name: "Claude 4.5 Opus Thinking 32k", provider: "Anthropic", score: 35, correct: 7 },
             { rank: 4, name: "Deepseek V3.2 Thinking", provider: "Deepseek", score: 35, correct: 7 },
             { rank: 5, name: "Kimi k2 thinking", provider: "Moonshot AI", score: 35, correct: 7 },
-            { rank: 6, name: "GPT 5.1 High", provider: "OpenAI", score: 30, correct: 6 }
+            { rank: 6, name: "GPT 5.1 High", provider: "OpenAI", score: 30, correct: 6 },
+            { rank: 7, name: "GPT-5.1 Codex (High)", provider: "OpenAI", score: 30, correct: 6 }
            
         ];
         // Category data
