@@ -43,12 +43,12 @@
                 <span class="text-5xl float-animation" style="animation-delay: 0.5s;">♠️</span>
             </div>
             <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-                Evaluating Large Language Models on strategic poker reasoning across 26 proprietary scenarios
+                Evaluating Large Language Models on strategic poker reasoning across 20 proprietary scenarios
             </p>
             <div class="flex items-center justify-center gap-6 mt-6 text-sm text-gray-500">
-                <span><i class="fas fa-database mr-2"></i>26 Questions</span>
+                <span><i class="fas fa-database mr-2"></i>20 Questions</span>
                 <span><i class="fas fa-lock mr-2"></i>Private Dataset</span>
-                <span><i class="fas fa-calendar mr-2"></i>Updated: Dec 2025</span>
+                <span><i class="fas fa-calendar mr-2"></i>Updated: Jan 2025</span>
             </div>
         </div>
     </header>
@@ -60,15 +60,15 @@
                 <div class="text-gray-400 text-sm mt-1">Models Tested</div>
             </div>
             <div class="card-gradient rounded-xl p-5 border border-blue-900/50 text-center">
-                <div class="text-3xl font-bold text-green-400">26</div>
+                <div class="text-3xl font-bold text-green-400">20</div>
                 <div class="text-gray-400 text-sm mt-1">Test Questions</div>
             </div>
             <div class="card-gradient rounded-xl p-5 border border-blue-900/50 text-center">
-                <div class="text-3xl font-bold text-purple-400" id="avgScore">33.52%</div>
+                <div class="text-3xl font-bold text-purple-400" id="avgScore">38.57%</div>
                 <div class="text-gray-400 text-sm mt-1">Average Score</div>
             </div>
             <div class="card-gradient rounded-xl p-5 border border-blue-900/50 text-center">
-                <div class="text-3xl font-bold text-yellow-400" id="topScore">57.7%</div>
+                <div class="text-3xl font-bold text-yellow-400" id="topScore">65%</div>
                 <div class="text-gray-400 text-sm mt-1">Top Score</div>
             </div>
         </div>
@@ -112,7 +112,7 @@
                 <div>
                     <h3 class="text-lg font-semibold mb-3 text-blue-400">Methodology</h3>
                     <p class="text-gray-400 text-sm leading-relaxed">
-                        Our benchmark evaluates LLMs on strategic poker reasoning through 26 carefully crafted scenarios. 
+                        Our benchmark evaluates LLMs on strategic poker reasoning through 20 carefully crafted scenarios. 
                         Each question tests different aspects of poker knowledge including hand evaluation, pot odds calculation, 
                         position play, and bluffing strategies. Each question has only 1 correct answer which is verified using the solver GTO Wizard. Models are evaluated on accuracy.
                     </p>
@@ -157,14 +157,13 @@
     <script>
         // Leaderboard data
         const models = [
-            { rank: 1, name: "Gemini 3 Pro Preview", provider: "Google", score: 57.7, correct: 15 },
-            { rank: 2, name: "Grok 4.1 Thinking", provider: "xAI", score: 30.8, correct: 8 },
-            { rank: 3, name: "Claude 4.5 Opus Thinking 32k", provider: "Anthropic", score: 30.8, correct: 8 },
-            { rank: 4, name: "GPT-5.1 Codex (High)", provider: "OpenAI", score: 30.8, correct: 8 },
-         { rank: 5, name: "Deepseek V3.2 Thinking", provider: "Deepseek", score: 30.8, correct: 8 },
-            { rank: 6, name: "Kimi k2 thinking", provider: "Moonshot AI", score: 26.9, correct: 7 },
-            { rank: 7, name: "GPT 5.1 High", provider: "OpenAI", score: 26.9, correct: 7 }
-           
+            { rank: 1, name: "Gemini 3 Pro Preview", provider: "Google", score: 65, correct: 13 },
+            { rank: 2, name: "Grok 4.1 Thinking", provider: "xAI", score: 40, correct: 8 },
+            { rank: 3, name: "Claude 4.5 Opus Thinking 32k", provider: "Anthropic", score: 35, correct: 7 },
+            { rank: 4, name: "Deepseek V3.2 Thinking", provider: "Deepseek", score: 35, correct: 7 },
+            { rank: 5, name: "Kimi k2 thinking", provider: "Moonshot AI", score: 35, correct: 7 },
+            { rank: 6, name: "GPT 5.1 High", provider: "OpenAI", score: 30, correct: 6 },
+            { rank: 7, name: "GPT-5.1 Codex (High)", provider: "OpenAI", score: 30, correct: 6 }
            
         ];
         // Category data
@@ -197,7 +196,7 @@
                                 ${model.score}%
                             </span>
                         </td>
-                        <td class="px-6 py-4 text-center text-gray-300">${model.correct}/26</td>
+                        <td class="px-6 py-4 text-center text-gray-300">${model.correct}/20</td>
                         <td class="px-6 py-4 hidden md:table-cell">
                             <div class="w-full bg-gray-700 rounded-full h-2">
                                 <div class="${barColor} h-2 rounded-full bar-animate" style="width: ${model.score}%"></div>
