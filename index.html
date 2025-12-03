@@ -43,10 +43,10 @@
                 <span class="text-5xl float-animation" style="animation-delay: 0.5s;">♠️</span>
             </div>
             <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-                Evaluating Large Language Models on strategic poker reasoning across 20 proprietary scenarios
+                Evaluating Large Language Models on strategic poker reasoning across 30 proprietary scenarios
             </p>
             <div class="flex items-center justify-center gap-6 mt-6 text-sm text-gray-500">
-                <span><i class="fas fa-database mr-2"></i>20 Questions</span>
+                <span><i class="fas fa-database mr-2"></i>30 Questions</span>
                 <span><i class="fas fa-lock mr-2"></i>Private Dataset</span>
                 <span><i class="fas fa-calendar mr-2"></i>Updated: Jan 2025</span>
             </div>
@@ -112,7 +112,7 @@
                 <div>
                     <h3 class="text-lg font-semibold mb-3 text-blue-400">Methodology</h3>
                     <p class="text-gray-400 text-sm leading-relaxed">
-                        Our benchmark evaluates LLMs on strategic poker reasoning through 20 carefully crafted scenarios. 
+                        Our benchmark evaluates LLMs on strategic poker reasoning through 30 carefully crafted scenarios. 
                         Each question tests different aspects of poker knowledge including hand evaluation, pot odds calculation, 
                         position play, and bluffing strategies. Each question has only 1 correct answer which is verified using the solver GTO Wizard. Models are evaluated on accuracy.
                     </p>
@@ -157,13 +157,17 @@
     <script>
         // Leaderboard data
         const models = [
-            { rank: 1, name: "Gemini 3 Pro Preview", provider: "Google", score: 65, correct: 13 },
-            { rank: 2, name: "Grok 4.1 Thinking", provider: "xAI", score: 40, correct: 8 },
-            { rank: 3, name: "Claude 4.5 Opus Thinking 32k", provider: "Anthropic", score: 35, correct: 7 },
-            { rank: 4, name: "Deepseek V3.2 Thinking", provider: "Deepseek", score: 35, correct: 7 },
-            { rank: 5, name: "Kimi k2 thinking", provider: "Moonshot AI", score: 35, correct: 7 },
-            { rank: 6, name: "GPT 5.1 High", provider: "OpenAI", score: 30, correct: 6 },
-            { rank: 7, name: "GPT-5.1 Codex (High)", provider: "OpenAI", score: 30, correct: 6 }
+            { rank: 1, name: "Gemini 3 Pro Preview", provider: "Google", correct: 17/30 },
+            { rank: 2, name: "Kimi k2 thinking", provider: "Moonshot AI",  correct: 12/30},
+            { rank: 3, name: "Grok 4.1 Thinking", provider: "xAI",  correct: 11/30},
+             { rank: 4, name: "Deepseek V3.2 Thinking", provider: "Deepseek",  correct: 10/30 },
+            { rank: 5, name: "GPT-5.1 Codex (High)", provider: "OpenAI",  correct: 9/30},
+            { rank: 6, name: "Claude 4.5 Opus Thinking 32k", provider: "Anthropic",  correct: 8/30 },
+           
+            
+             
+            { rank: 6, name: "GPT 5.1 High", provider: "OpenAI",  correct: 8/30 }
+           
            
         ];
         // Category data
