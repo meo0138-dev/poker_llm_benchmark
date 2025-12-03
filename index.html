@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Poker Benchmark</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+        .card-gradient {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+        }
+        .gold { color: #ffd700; }
+        .silver { color: #c0c0c0; }
+        .bronze { color: #cd7f32; }
+        .glow {
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        .bar-animate {
+            transition: width 1s ease-out;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white">
+    <!-- Header -->
+    <header class="py-8 px-4 border-b border-blue-900/50">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="flex items-center justify-center gap-4 mb-4">
+                <span class="text-5xl float-animation">🃏</span>
+                <h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    LLM Poker Benchmark
+                </h1>
+                <span class="text-5xl float-animation" style="animation-delay: 0.5s;">♠️</span>
+            </div>
+            <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                Evaluating Large Language Models on strategic poker reasoning across 20 proprietary scenarios
+            </p>
+            <div class="flex items-center justify-center gap-6 mt-6 text-sm text-gray-500">
+                <span><i class="fas fa-database mr-2"></i>20 Questions</span>
+                <span><i class="fas fa-lock mr-2"></i>Private Dataset</span>
+                <span><i class="fas fa-calendar mr-2"></i>Updated: Jan 2025</span>
+            </div>
+        </div>
+    </header>
+    <!-- Stats Cards -->
+    <section class="max-w-6xl mx-auto px-4 py-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="card-gradient rounded-xl p-5 border border-blue-900/50 text-center glow">
+                <div class="text-3xl font-bold text-blue-400" id="totalModels">12</div>
+                <div class="text-gray-400 text-sm mt-1">Models Tested</div>
+            </div>
+            <div class="card-gradient rounded-xl p-5 border border-blue-900/50 text-center">
+                <div class="text-3xl font-bold text-green-400">20</div>
+                <div class="text-gray-400 text-sm mt-1">Test Questions</div>
+            </div>
+            <div class="card-gradient rounded-xl p-5 border border-blue-900/50 text-center">
+                <div class="text-3xl font-bold text-purple-400" id="avgScore">68.3%</div>
+                <div class="text-gray-400 text-sm mt-1">Average Score</div>
+            </div>
+            <div class="card-gradient rounded-xl p-5 border border-blue-900/50 text-center">
+                <div class="text-3xl font-bold text-yellow-400" id="topScore">95%</div>
+                <div class="text-gray-400 text-sm mt-1">Top Score</div>
+            </div>
+        </div>
+    </section>
+    <!-- Leaderboard -->
+    <section class="max-w-6xl mx-auto px-4 py-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+            <i class="fas fa-trophy text-yellow-500"></i>
+            Leaderboard
+        </h2>
+        <div class="card-gradient rounded-xl border border-blue-900/50 overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-blue-900/30">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-300">Rank</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-300">Model</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-300">Provider</th>
+                            <th class="px-6 py-4 text-center text-sm font-semibold text-gray-300">Score</th>
+                            <th class="px-6 py-4 text-center text-sm font-semibold text-gray-300">Correct</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-300 hidden md:table-cell">Performance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboardBody">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <!-- Category Breakdown -->
+    <section class="max-w-6xl mx-auto px-4 py-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+            <i class="fas fa-chart-pie text-purple-500"></i>
+            Category Breakdown
+        </h2>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="card-gradient rounded-xl p-6 border border-blue-900/50">
+                <h3 class="text-lg font-semibold mb-4 text-gray-300">Question Categories</h3>
+                <div class="space-y-4" id="categoryBars">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+            <div class="card-gradient rounded-xl p-6 border border-blue-900/50">
+                <h3 class="text-lg font-semibold mb-4 text-gray-300">Difficulty Distribution</h3>
+                <div class="flex items-center justify-center h-48">
+                    <div class="flex items-end gap-4 h-full pt-8">
+                        <div class="flex flex-col items-center">
+                            <div class="w-16 bg-green-500/80 rounded-t" style="height: 60px;"></div>
+                            <span class="text-sm text-gray-400 mt-2">Easy</span>
+                            <span class="text-xs text-gray-500">5 Qs</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-16 bg-yellow-500/80 rounded-t" style="height: 100px;"></div>
+                            <span class="text-sm text-gray-400 mt-2">Medium</span>
+                            <span class="text-xs text-gray-500">8 Qs</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-16 bg-red-500/80 rounded-t" style="height: 80px;"></div>
+                            <span class="text-sm text-gray-400 mt-2">Hard</span>
+                            <span class="text-xs text-gray-500">7 Qs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Section -->
+    <section class="max-w-6xl mx-auto px-4 py-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+            <i class="fas fa-info-circle text-blue-500"></i>
+            About the Benchmark
+        </h2>
+        <div class="card-gradient rounded-xl p-6 border border-blue-900/50">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-3 text-blue-400">Methodology</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Our benchmark evaluates LLMs on strategic poker reasoning through 20 carefully crafted scenarios. 
+                        Each question tests different aspects of poker knowledge including hand evaluation, pot odds calculation, 
+                        position play, and bluffing strategies. Models are evaluated on both accuracy and reasoning quality.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-3 text-blue-400">Evaluation Criteria</h3>
+                    <ul class="text-gray-400 text-sm space-y-2">
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-check text-green-500"></i>
+                            Correct action selection (fold/call/raise)
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-check text-green-500"></i>
+                            Accurate probability estimation
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-check text-green-500"></i>
+                            Sound strategic reasoning
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-check text-green-500"></i>
+                            Opponent modeling awareness
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-6 pt-6 border-t border-blue-900/50">
+                <div class="flex items-center gap-2 text-yellow-500">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span class="text-sm">Note: The dataset is not publicly available to prevent contamination of future model training.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="border-t border-blue-900/50 mt-12 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 text-sm">
+            <p>© 2025 LLM Poker Benchmark. All rights reserved.</p>
+            <p class="mt-2">Built for evaluating AI poker reasoning capabilities</p>
+        </div>
+    </footer>
+    <script>
+        // Leaderboard data
+        const models = [
+            { rank: 1, name: "GPT-4o", provider: "OpenAI", score: 95, correct: 19 },
+            { rank: 2, name: "Claude 3.5 Sonnet", provider: "Anthropic", score: 90, correct: 18 },
+            { rank: 3, name: "Gemini 1.5 Pro", provider: "Google", score: 85, correct: 17 },
+            { rank: 4, name: "GPT-4 Turbo", provider: "OpenAI", score: 80, correct: 16 },
+            { rank: 5, name: "Claude 3 Opus", provider: "Anthropic", score: 80, correct: 16 },
+            { rank: 6, name: "Llama 3.1 405B", provider: "Meta", score: 75, correct: 15 },
+            { rank: 7, name: "Mistral Large", provider: "Mistral AI", score: 70, correct: 14 },
+            { rank: 8, name: "Gemini 1.5 Flash", provider: "Google", score: 65, correct: 13 },
+            { rank: 9, name: "Claude 3 Haiku", provider: "Anthropic", score: 60, correct: 12 },
+            { rank: 10, name: "GPT-3.5 Turbo", provider: "OpenAI", score: 55, correct: 11 },
+            { rank: 11, name: "Llama 3.1 70B", provider: "Meta", score: 50, correct: 10 },
+            { rank: 12, name: "Mixtral 8x7B", provider: "Mistral AI", score: 45, correct: 9 },
+        ];
+        // Category data
+        const categories = [
+            { name: "Hand Evaluation", questions: 5, color: "bg-blue-500" },
+            { name: "Pot Odds & Math", questions: 4, color: "bg-green-500" },
+            { name: "Position Strategy", questions: 4, color: "bg-purple-500" },
+            { name: "Bluffing & Tells", questions: 4, color: "bg-red-500" },
+            { name: "Tournament Play", questions: 3, color: "bg-yellow-500" },
+        ];
+        // Render leaderboard
+        function renderLeaderboard() {
+            const tbody = document.getElementById('leaderboardBody');
+            tbody.innerHTML = models.map(model => {
+                let rankIcon = '';
+                let rankClass = '';
+                if (model.rank === 1) { rankIcon = '🥇'; rankClass = 'gold'; }
+                else if (model.rank === 2) { rankIcon = '🥈'; rankClass = 'silver'; }
+                else if (model.rank === 3) { rankIcon = '🥉'; rankClass = 'bronze'; }
+                const barColor = model.score >= 80 ? 'bg-green-500' : model.score >= 60 ? 'bg-yellow-500' : 'bg-red-500';
+                return `
+                    <tr class="border-t border-blue-900/30 hover:bg-blue-900/20 transition-colors">
+                        <td class="px-6 py-4">
+                            <span class="text-lg ${rankClass}">${rankIcon || '#' + model.rank}</span>
+                        </td>
+                        <td class="px-6 py-4 font-medium">${model.name}</td>
+                        <td class="px-6 py-4 text-gray-400">${model.provider}</td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="px-3 py-1 rounded-full text-sm font-semibold ${model.score >= 80 ? 'bg-green-500/20 text-green-400' : model.score >= 60 ? 'bg-yellow-500/20 text-yellow-400' : 'bg-red-500/20 text-red-400'}">
+                                ${model.score}%
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-center text-gray-300">${model.correct}/20</td>
+                        <td class="px-6 py-4 hidden md:table-cell">
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="${barColor} h-2 rounded-full bar-animate" style="width: ${model.score}%"></div>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+        // Render category bars
+        function renderCategories() {
+            const container = document.getElementById('categoryBars');
+            container.innerHTML = categories.map(cat => `
+                <div>
+                    <div class="flex justify-between text-sm mb-1">
+                        <span class="text-gray-300">${cat.name}</span>
+                        <span class="text-gray-500">${cat.questions} questions</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-3">
+                        <div class="${cat.color} h-3 rounded-full bar-animate" style="width: ${(cat.questions / 5) * 100}%"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderLeaderboard();
+            renderCategories();
+        });
+    </script>
+</body>
+</html>
